@@ -11,3 +11,6 @@ def takeAPicture():
     camera.stop_preview()
     camera.capture('/home/pi/image.jpg')
     camera.stop_preview()
+
+if __name__ == "__main__":
+    takeAPicture()
