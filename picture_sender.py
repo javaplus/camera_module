@@ -2,21 +2,32 @@ import paho.mqtt.client as mqtt
 import socket
 import io
 
+def on_log(client, userdata, level, buf):
+    print("log: ",buf)
+
+
+def on_publish(client, userdata, mid):
+    print("on publish mid:" + str(mid))
+
 # send the picture to a q
 
 def sendPicture(pathToPic):
+    print("sending pic")
     byteArray = None
     with io.FileIO(pathToPic, 'rb') as file:
         byteArray = file.readall()
     
     #mqttc = mqtt.Client(getMyClientIdHostName)
-    mqttc = mqtt.Client("test")
-    #mqttc.connect("10.0.0.1", 1883)
+    mqttc = mqtt.Client()
+    mqttc.on_log = on_log
+    mqttc.on_publish = on_publish
     mqttc.connect("192.168.1.114", 1883)
-    #mqttc.connect("localhost", 1883)
     # retain messages so on restart clients get last message
-    mqttc.publish("picture/pics", payload=byteArray,qos=0,retain=True) 
-    mqttc.loop(2) #timeout = 2s
+    midValue = mqttc.publish("picture/pics", payload=byteArray,qos=0,retain=True) 
+    print("midValue=" + str(midValue)) 
+    mqttc.loop_start() #timeout = 2s
+    #mqttc.loop_stop() #timeout = 2s
+    print("published")
     
 def getMyClientIdHostName():
     clientId = "raspi"
@@ -30,4 +41,4 @@ def getMyClientIdHostName():
 
 
 if __name__ == "__main__":
-    sendPicture("c:/temp/hay.jpg")
+    sendPicture("/home/pi/pictures/test.jpg")

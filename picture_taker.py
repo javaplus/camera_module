@@ -10,10 +10,13 @@ def takeAPicture():
     fullPicturePathWithName = '/home/pi/pictures/' + getPictureName() 
     print("pic name =" + fullPicturePathWithName)
     camera = picamera.PiCamera()
+    camera.resolution = (640, 480)
 
     camera.start_preview()
     sleep(2)
     camera.capture(fullPicturePathWithName)
+    camera.close()
+    print("Captured pic")
     return fullPicturePathWithName
 
 if __name__ == "__main__":

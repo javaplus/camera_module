@@ -20,6 +20,7 @@ def on_message(client, userdata, msg):
     print(msg.topic+" "+str(msg.payload))
     pathToPic = picTaker.takeAPicture()
     picSender.sendPicture(pathToPic)
+    print("done sending pic")
 
 
 client = mqtt.Client()
