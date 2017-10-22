@@ -27,7 +27,7 @@ def sendPicture(pathToPic):
     print("midValue=" + str(midValue)) 
     mqttc.loop_start() #timeout = 2s
     #mqttc.loop_stop() #timeout = 2s
-    print("published")
+    print("publish and loop_start called")
     
 def getMyClientIdHostName():
     clientId = "raspi"
