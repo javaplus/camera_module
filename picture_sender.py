@@ -12,7 +12,8 @@ def sendPicture(pathToPic):
     #mqttc = mqtt.Client(getMyClientIdHostName)
     mqttc = mqtt.Client("test")
     #mqttc.connect("10.0.0.1", 1883)
-    mqttc.connect("localhost", 1883)
+    mqttc.connect("192.168.1.114", 1883)
+    #mqttc.connect("localhost", 1883)
     # retain messages so on restart clients get last message
     mqttc.publish("picture/pics", payload=byteArray,qos=0,retain=True) 
     mqttc.loop(2) #timeout = 2s

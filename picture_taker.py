@@ -7,14 +7,13 @@ def getPictureName():
 
 
 def takeAPicture():
+    fullPicturePathWithName = '/home/pi/pictures/' + getPictureName() 
+    print("pic name =" + fullPicturePathWithName)
     camera = picamera.PiCamera()
 
     camera.start_preview()
-    sleep(5)
-    camera.stop_preview()
-    fullPicturePathWithName = '/home/pi/pictures/' + getPictureName() 
+    sleep(2)
     camera.capture(fullPicturePathWithName)
-    camera.stop_preview()
     return fullPicturePathWithName
 
 if __name__ == "__main__":
